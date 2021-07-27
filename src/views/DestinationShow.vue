@@ -10,19 +10,19 @@
 
 <script setup>
 import { computed, onMounted, onUpdated } from "@vue/runtime-core"
-import { useRoute } from "vue-router"
 import sourceData from "@/data.json"
 
-const route = useRoute()
 ref: destination = {}
-ref: destinationId = ""
 
-destinationId = computed(() => parseInt(route.params.id))
+const props = defineProps({
+  id: {
+    type: Number,
+    required: true,
+  },
+})
 
 const initDestination = () => {
-  destination = sourceData.destinations.find(
-    (dest) => dest.id === destinationId.value
-  )
+  destination = sourceData.destinations.find((dest) => dest.id === props.id)
 }
 onMounted(() => {
   initDestination()
@@ -31,7 +31,6 @@ onMounted(() => {
 // onUpdated(() => {
 //   initDestination()
 // })
-
 </script>
 
 <style lang="scss" scoped></style>

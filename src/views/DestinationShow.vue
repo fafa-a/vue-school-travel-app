@@ -6,11 +6,27 @@
       <p>{{ destination.description }}</p>
     </div>
   </section>
+  <section class="experiences">
+    <h2>Top experiences in {{ destination.name }}</h2>
+    <div class="cards">
+      <router-link
+        v-for="experience in destination.experiences"
+        :key="experience.slug"
+        :to="{
+          name: 'experience.show',
+          params: { experienceSlug: experience.slug },
+        }"
+      >
+        <ExperienceCard :experience="experience" />
+      </router-link>
+    </div>
+  </section>
 </template>
 
 <script setup>
 import { computed, onMounted, onUpdated } from "@vue/runtime-core"
 import sourceData from "@/data.json"
+import ExperienceCard from "@/components/ExperienceCard.vue"
 
 ref: destination = {}
 
@@ -27,10 +43,6 @@ const initDestination = () => {
 onMounted(() => {
   initDestination()
 })
-
-// onUpdated(() => {
-//   initDestination()
-// })
 </script>
 
 <style lang="scss" scoped></style>

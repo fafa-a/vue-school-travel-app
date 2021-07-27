@@ -28,11 +28,14 @@ const routes = [
     name: "panama",
     component: () => import("@/views/Panama.vue"),
   },
+  {
+    path: "/destination/:id",
+    component: () => import("@/views/DestinationShow.vue"),
+  },
 ]
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  linkActiveClass: "vue-school-active-link",
 })
 export { router }

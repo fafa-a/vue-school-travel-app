@@ -11,14 +11,16 @@
   </div>
 </template>
 <script setup>
-import { useRouter } from "vue-router"
+import { useRouter, useRoute } from "vue-router"
 
 ref: username = ""
 ref: password = ""
 const router = useRouter()
+const route = useRoute()
 
 const login = () => {
   window.user = username
-  router.push({ name: "protected" })
+  const redirectPath = route.query.redirect || "/protected"
+  router.push(redirectPath)
 }
 </script>

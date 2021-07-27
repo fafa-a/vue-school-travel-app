@@ -29,9 +29,9 @@ onMounted(() => {
   initData()
 })
 
-onUpdated(() => {
-  initData()
-})
+// onUpdated(() => {
+//   initData()
+// })
 </script>
 
 <style lang="scss" scoped></style>

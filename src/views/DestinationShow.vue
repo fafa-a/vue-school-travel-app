@@ -9,19 +9,28 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from "@vue/runtime-core"
+import { computed, onMounted, onUpdated } from "@vue/runtime-core"
 import { useRoute } from "vue-router"
-import sourceData from "@/data.json"
 
 const route = useRoute()
 ref: destination = {}
 ref: destinationId = ""
 
-onMounted(() => {
-  destinationId = computed(() => parseInt(route.params.id))
-  destination = sourceData.destinations.find(
-    (dest) => dest.id === destinationId.value
+destinationId = computed(() => parseInt(route.params.id))
+
+const initData = async () => {
+  const res = await fetch(
+    `https://travel-dummy-api.netlify.app/${route.params.slug}`
   )
+  destination = await res.json()
+}
+
+onMounted(() => {
+  initData()
+})
+
+onUpdated(() => {
+  initData()
 })
 </script>
 

@@ -45,5 +45,14 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    return (
+      savedPosition ||
+      new Promise((resolve) => {
+        // fix the transition animation
+        setTimeout(() => resolve({ top: 0, behavior: "smooth" }), 300)
+      })
+    )
+  },
 })
 export { router }

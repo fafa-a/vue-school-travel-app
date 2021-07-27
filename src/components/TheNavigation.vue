@@ -1,9 +1,20 @@
 <template>
   <div id="nav">
-    <router-link :to="{ path: '/' }">Home</router-link>
-    <router-link :to="{ path: '/brazil' }">Brazil</router-link>
-    <router-link :to="{ path: '/hawaii' }">Hawaii</router-link>
-    <router-link :to="{ path: '/Jamaica' }">Jamaica</router-link>
-    <router-link :to="{ path: '/panama' }">Panama</router-link>
+    <router-link id="logo" to="/">Vue School Travel App</router-link>
+    <router-link
+      v-for="destination in destinations"
+      :key="destination.id"
+      :to="{
+        name: 'destination.show',
+        params: { id: destination.id, slug: destination.slug },
+      }"
+    >
+      {{ destination.name }}
+    </router-link>
   </div>
 </template>
+<script setup>
+import sourceData from "@/data.json"
+
+const { destinations } = sourceData
+</script>

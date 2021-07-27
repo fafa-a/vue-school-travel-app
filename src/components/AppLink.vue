@@ -13,13 +13,12 @@
 </template>
 
 <script setup>
-
 import { RouterLink } from "vue-router"
 defineProps({
   ...RouterLink.props,
 })
-
-const isExternal = () => typeof to === "string" && to.startsWith("http")
+ref: to = ""
+const isExternal = () => typeof to === "string" && to.startsWith("https")
 </script>
 
 <style lang="scss" scoped></style>
